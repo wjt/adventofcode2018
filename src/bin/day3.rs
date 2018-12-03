@@ -51,17 +51,8 @@ fn main() {
     // flat_map! this feels just like home!
     println!("{}", fabric.iter().flat_map(|row| row.iter()).filter(|&x| *x > 1).count());
     for r in &claims {
-        let mut bad = false;
-
         // annoyingly fabric[r.xs()][r.ys()] doesn't mean what I want it to
-        for i in r.xs() {
-            for j in r.ys() {
-                if fabric[i][j] != 1 {
-                    bad = true;
-                }
-            }
-        }
-        if !bad {
+        if fabric[r.xs()].iter().flat_map(|row| row[r.ys()].iter()).filter(|&x| *x != 1).count() == 0 {
             println!("{}", r.elf);
         }
     }
